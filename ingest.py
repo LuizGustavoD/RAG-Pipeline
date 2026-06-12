@@ -81,5 +81,6 @@ if documents:
         metadatas=metadatas,
         embeddings=embeddings
     )
+    print("Documents indexed.")
 else:
     print("No documents were found or processed.")
