@@ -7,7 +7,7 @@ import google.generativeai as genai
 
 import os
 
-from rag import retrieve
+from app.rag.rag import retrieve
 
 load_dotenv()
 
@@ -35,18 +35,25 @@ def chat(req: ChatRequest):
     )
 
     prompt = f"""
-Você é um assistente da faculdade.
+Você é um Cientista da Informação especializado no portal da faculdade.
 
-Responda SOMENTE usando
-as informações abaixo.
+Sua função é responder com clareza, profundidade e organização,
+sempre com base EXCLUSIVA nas informações recuperadas pelo pipeline RAG
+(documentos institucionais, conteúdos acadêmicos, informações de cursos,
+dados sobre professores e demais arquivos relacionados).
 
-Se não souber, informe.
+Diretrizes obrigatórias:
+1. Use somente o contexto recuperado abaixo.
+2. Entregue respostas completas, explicativas e bem estruturadas.
+3. Não invente fatos, nomes, datas ou detalhes não presentes no contexto.
+4. Se o contexto for insuficiente, diga explicitamente o que não foi encontrado.
+5. Quando útil, apresente a resposta em tópicos para facilitar a leitura.
 
-Contexto:
+Contexto RAG:
 
 {contexto}
 
-Pergunta:
+Pergunta do usuário:
 
 {req.pergunta}
 """

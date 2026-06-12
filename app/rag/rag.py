@@ -1,13 +1,14 @@
 from sentence_transformers import SentenceTransformer
 import chromadb
+import os
 
 model = SentenceTransformer(
     "BAAI/bge-m3"
 )
 
 client = chromadb.HttpClient(
-    host="localhost",
-    port=8001
+    host=os.getenv("CHROMA_HOST", "localhost"),
+    port=int(os.getenv("CHROMA_PORT", "8006"))
 )
 
 collection = client.get_collection(
